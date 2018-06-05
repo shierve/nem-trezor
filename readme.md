@@ -67,6 +67,7 @@ TrezorAccount.getAccount(0)
 For sending an encrypted message (only valid for transfer transactions), we will pass the public key of the receiver to the signTransaction function:
 
 ```typescript
+// steps 1 and 2 are the same as before
 // 3. Sign, serialize, and encrypt the transaction from the trezor device. This will prompt for confirmation on the device.
 account.signTransaction(trans, "<receiver_public_key>")
   .subscribe((signedTransaction) => {
