@@ -1,0 +1,41 @@
+{
+  "name": "nem-trezor",
+  "version": "1.0.0",
+  "description": "nem trezor library",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "author": "Sergi <sergi.cg8@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "copyvendor": "cp -r ./src/vendor ./dist/src/vendor",
+    "build": "rm -rf dist && tsc && npm run copyvendor",
+    "test": "npm run build && nyc mocha --ui bdd --recursive ./dist/test --timeout 10000",
+    "coverage": "nyc report --reporter=text-lcov --timeout 90000 | coveralls"
+  },
+  "keywords": [
+    "NEM",
+    "Trezor",
+    "Library",
+    "Blockchain"
+  ],
+  "devDependencies": {
+    "@types/node": "^9.4.6",
+    "tslint": "^5.9.1",
+    "typescript": "^2.7.2"
+  },
+  "dependencies": {
+    "crypto-js": "^3.1.9-1",
+    "nem-library": "^1.0.1"
+  },
+  "files": [
+    "README.md",
+    "dist/src/",
+    "dist/index.d.ts",
+    "dist/index.js",
+    "dist/index.js.map"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shierve/nem-trezor"
+  }
+}
