@@ -32,7 +32,6 @@ export class TrezorAccount extends PublicAccount {
     transaction.signer = PublicAccount.createWithPublicKey("462ee976890916e54fa825d26bdd0235f5eb5b6a143c199ab0ae5ee9328e08ce");
     transaction.setNetworkType(NEMLibrary.getNetworkType());
     const dto: any = transaction.toDTO();
-    console.log("dto:", dto);
     if (receiverPublicKey !== undefined) {
       dto.message.type = 2;
       dto.message.publicKey = receiverPublicKey;

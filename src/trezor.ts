@@ -88,11 +88,8 @@ const deriveRemote = (account, network) => {
 
 const serialize = (transaction, hdKeypath) => {
   TrezorConnect = Trezor.TrezorConnect();
-  console.log("trans", transaction);
-  console.log("path", hdKeypath);
   return new Promise((resolve, reject) => {
     TrezorConnect.nemSignTx(hdKeypath, transaction, (result) => {
-      console.log(result);
       if (result.success) {
         resolve(result.message);
       } else {

@@ -21,11 +21,10 @@
     "index.ts"
   ],
   "include": [
-    "test/**/*.test.ts",
     "src/**/*.ts",
-    "trezor.ts",
     "crypto-js.d.ts",
-    "nem-sdk.d.ts"
+    "nem-sdk.d.ts",
+    "index.ts"
   ],
   "exclude": [
     "node_modules",
