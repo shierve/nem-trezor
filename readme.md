@@ -1,6 +1,6 @@
 # Nem Trezor
 
-[![npm version](https://badge.fury.io/js/nem-voting.svg)](https://badge.fury.io/js/nem-voting)
+[![npm version](https://badge.fury.io/js/nem-trezor.svg)](https://badge.fury.io/js/nem-trezor)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 nem-trezor is a typescript / node.js npm module that adds trezor functionalities to nem-library.
