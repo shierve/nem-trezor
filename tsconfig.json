@@ -23,8 +23,7 @@
   "include": [
     "src/**/*.ts",
     "crypto-js.d.ts",
-    "nem-sdk.d.ts",
-    "index.ts"
+    "nem-sdk.d.ts"
   ],
   "exclude": [
     "node_modules",
