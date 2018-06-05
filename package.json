@@ -8,9 +8,7 @@
   "license": "MIT",
   "scripts": {
     "copyvendor": "cp -r ./src/vendor ./dist/src/vendor",
-    "build": "rm -rf dist && tsc && npm run copyvendor",
-    "test": "npm run build && nyc mocha --ui bdd --recursive ./dist/test --timeout 10000",
-    "coverage": "nyc report --reporter=text-lcov --timeout 90000 | coveralls"
+    "build": "rm -rf dist && tsc && npm run copyvendor"
   },
   "keywords": [
     "NEM",
