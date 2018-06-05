@@ -9,17 +9,18 @@ import {
 /**
  * TrezorAccount model
  */
-export class TrezorAccount extends PublicAccount {
+export class TrezorAccount {
   public readonly address: Address;
-  public readonly publicKey: string;
+  public readonly hdKeyPath: string;
 
   /**
    * Constructor
    * @internal
    * @param address
    */
-  constructor(address: Address, public readonly hdKeyPath: string) {
-    super(address, "");
+  constructor(address: Address, hdKeyPath: string) {
+    this.address = address;
+    this.hdKeyPath = hdKeyPath;
   }
 
   /**
