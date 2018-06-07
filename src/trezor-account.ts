@@ -24,14 +24,6 @@ export class TrezorAccount {
   }
 
   /**
-   * Initializes internal nem-library
-   * @param network
-   */
-  public static bootstrap(network: NetworkTypes) {
-    NEMLibrary.bootstrap(network);
-  }
-
-  /**
    * Sign a transaction
    * @param transaction
    * @param receiverPublicKey (optional): if given, the message will be encrypted
