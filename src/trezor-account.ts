@@ -23,6 +23,10 @@ export class TrezorAccount {
     this.hdKeyPath = hdKeyPath;
   }
 
+  public static bootstrap(network: NetworkTypes) {
+    NEMLibrary.bootstrap(network);
+  }
+
   /**
    * Sign a transaction
    * @param transaction

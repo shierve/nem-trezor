@@ -36,6 +36,7 @@ import { NEMLibrary, NetworkTypes, Transaction, TransferTransaction,
 import { TrezorAccount } from 'nem-trezor';
 
 NEMLibrary.bootstrap(NetworkTypes.TEST_NET);
+TrezorAccount.bootstrap(NetworkTypes.TEST_NET); // bootstrap internal nem-library for nem-trezor
 
 // 1. Get the first account of the trezor device. Change the number for different accounts. This will prompt a confirmation on the device.
 TrezorAccount.getAccount(0)
