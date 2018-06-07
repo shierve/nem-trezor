@@ -23,6 +23,10 @@ export class TrezorAccount {
     this.hdKeyPath = hdKeyPath;
   }
 
+  /**
+   * Initializes internal nem-library
+   * @param network
+   */
   public static bootstrap(network: NetworkTypes) {
     NEMLibrary.bootstrap(network);
   }
