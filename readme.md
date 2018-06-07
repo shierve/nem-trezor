@@ -20,7 +20,9 @@ to install the npm module on your typescript or node project run:
 
 the module is made to work together with nem-library, so you should install that too:
 
-`npm install nem-library --save`
+`npm install nem-library@1.0.5 --save`
+
+it is important that 1.0.5 is installed since it needs to be the same version than the one in nem-trezor
 
 ## Usage <a name="examples"></a>
 
