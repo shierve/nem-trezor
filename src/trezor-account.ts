@@ -15,7 +15,6 @@ export class TrezorAccount {
 
   /**
    * Constructor
-   * @internal
    * @param address
    */
   constructor(address: Address, hdKeyPath: string) {
