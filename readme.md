@@ -40,10 +40,11 @@ import { TrezorAccount } from 'nem-trezor';
 // 0. This function will bootstrap both the internal nem-library for nem-trezor and the local one
 // if the local version of nem-library and the one in nem-trezor don't match then this will give problems
 NEMLibrary.bootstrap(NetworkTypes.TEST_NET);
+const transactionHttp = new TransactionHttp();
 
 // 1. Get the first account of the trezor device. Change the number for different accounts. This will prompt a confirmation on the device.
 TrezorAccount.getAccount(0)
-  .subscribe((account) => {
+  .flatMap((account) => {
     console.log(account);
     // 2. Create Transaction object
     // For more information on Transaction types and their usage check out the nem-library documentation
@@ -54,16 +55,12 @@ TrezorAccount.getAccount(0)
       PlainMessage.create("hello from trezor"),
     );
     // 3. Sign and serialize the transaction from the trezor device. This will prompt for confirmation on the device.
-    account.signTransaction(trans)
-    .subscribe((signedTransaction) => {
-      console.log(signedTransaction);
-      // 4. Broadcast the transaction with nem-library
-      const transactionHttp = new TransactionHttp();
-      transactionHttp.announceTransaction(signedTransaction).subscribe((x) => {
-        console.log(x);
-      })
-    });
-  });
+    return account.signTransaction(trans);
+  })
+  // Announce the transaction to the network
+  .flatMap((signedTransaction) => transactionHttp.announceTransaction(signedTransaction))
+  // Print the response
+  .subscribe((response) => console.log(response), (err) => console.error(err));
 ```
 
 ### Sending an encrypted message
@@ -74,12 +71,8 @@ For sending an encrypted message (only valid for transfer transactions), we will
 // steps 1 and 2 are the same as before
 // 3. Sign, serialize, and encrypt the transaction from the trezor device. This will prompt for confirmation on the device.
 account.signTransaction(trans, "<receiver_public_key>")
-  .subscribe((signedTransaction) => {
-    console.log(signedTransaction);
-    // 4. Broadcast the transaction with nem-library
-    const transactionHttp = new TransactionHttp();
-    transactionHttp.announceTransaction(signedTransaction).subscribe((x) => {
-      console.log(x);
-    })
-  });
+   // Announce the transaction to the network
+  .flatMap((signedTransaction) => transactionHttp.announceTransaction(signedTransaction))
+  // Print the response
+  .subscribe((response) => console.log(response), (err) => console.error(err));
 ```
