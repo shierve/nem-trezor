@@ -1,6 +1,6 @@
 {
   "name": "nem-trezor",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "nem trezor library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
