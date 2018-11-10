@@ -68,7 +68,7 @@ export class TrezorAccount {
     }
     return Observable.fromPromise(Trezor.createAccount(NEMLibrary.getNetworkType(), index))
       .map((account: any) => {
-        return new TrezorAccount(account.address, account.hdKeypath);
+        return new TrezorAccount(new Address(account.address), account.hdKeypath);
       });
   }
 
