@@ -62,7 +62,8 @@ export class TrezorAccount {
    */
   public static getAccount(index: number): Observable<TrezorAccount> {
     // Check if running in a browser environment
-    if (NEMLibrary.getEnvironment() !== Environment.Browser) {
+    const isBrowser = typeof window !== 'undefined' && typeof window.document !== 'undefined';
+    if (!isBrowser) {
       throw new Error("Trezor Accounts can only be created in a browser environment");
     }
     return Observable.fromPromise(Trezor.createAccount(NEMLibrary.getNetworkType(), index))
