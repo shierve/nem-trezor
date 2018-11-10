@@ -26,6 +26,7 @@ var TrezorConnect = (function () {
 
     var chrome = window.chrome;
     var IS_CHROME_APP = chrome && chrome.app && chrome.app.window;
+    // IS_CHROME_APP = true;
     console.log('chrome', IS_CHROME_APP);
 
     var ERR_TIMED_OUT = 'Loading timed out';
