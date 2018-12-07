@@ -30,7 +30,10 @@ const createAccount = async (network: number, index: number) => {
   }
   const hdKeypath = bip44(network, index);
 
-  const result = await TrezorConnect.nemGetAddress(hdKeypath, network);
+  const result = await TrezorConnect.nemGetAddress({
+    path: hdKeypath,
+    network
+  });
   if (result.success) {
     return {
       address: result.address,
@@ -41,6 +44,8 @@ const createAccount = async (network: number, index: number) => {
   }
 };
 
+// TODO: this can be done with the new trezor-connect
+// review the encrypt/decrypt logic
 // const getPubKey = (path) => {
 //   TrezorConnect = Trezor.TrezorConnect();
 //   return new Promise((resolve, reject) => {
@@ -54,7 +59,13 @@ const deriveRemote = async (account, network) => {
   const key = "Export delegated harvesting key?";
   const value = "0000000000000000000000000000000000000000000000000000000000000000";
 
-  const result = await TrezorConnect.cipherKeyValue(account.hdKeypath, key, value, true, true);
+  const result = await TrezorConnect.cipherKeyValue({
+    path: account.hdKeypath,
+    key,
+    value,
+    askOnEncrypt: true,
+    askOnDecrypt: true
+  });
 
   if (result.success) {
     const privateKey = nem
@@ -80,16 +91,23 @@ const deriveRemote = async (account, network) => {
 };
 
 const serialize = async (transaction, hdKeypath) => {
-  const result = await TrezorConnect.nemSignTransaction(hdKeypath, transaction);
+  const result = await TrezorConnect.nemSignTransaction({
+    path: hdKeypath,
+    transaction,
+  });
   if (result.success) {
-    return result.message;
+    return result.payload;
   } else {
+    console.log("error", result);
     throw new Error(result.error);
   }
 };
 
 const showAccount = async (account) => {
-  const result = await TrezorConnect.nemGetAddress(account.hdKeypath, account.network);
+  const result = await TrezorConnect.nemGetAddress({
+    path: account.hdKeypath,
+    network: account.network,
+  });
   if (result.success) {
     return result.address;
   } else {
