@@ -53,6 +53,25 @@ export class TrezorAccount {
     });
   }
 
+  private async signSerialTransactionsPromise(transactions: Transaction[]): Promise<SignedTransaction[]> {
+    const dtos = transactions.map(t => {
+      t.signer = PublicAccount.createWithPublicKey("462ee976890916e54fa825d26bdd0235f5eb5b6a143c199ab0ae5ee9328e08ce");
+      t.setNetworkType(NEMLibrary.getNetworkType());
+      return t.toDTO();
+    });
+    const signedTransactions: SignedTransaction[] = [];
+    for (let i = 0; i < transactions.length; i++) {
+      const keepSession = (i < transactions.length - 1);
+      const serialized = await Trezor.serialize(dtos[i], this.hdKeyPath, keepSession);
+      signedTransactions.push(serialized as SignedTransaction);
+    }
+    return signedTransactions;
+  }
+
+  public signSerialTransactions(transactions: Transaction[]): Observable<SignedTransaction[]> {
+    return Observable.fromPromise(this.signSerialTransactionsPromise(transactions));
+  }
+
   /**
    * generate new account
    * @param walletName

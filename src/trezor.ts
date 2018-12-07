@@ -90,10 +90,11 @@ const deriveRemote = async (account, network) => {
   }
 };
 
-const serialize = async (transaction, hdKeypath) => {
+const serialize = async (transaction, hdKeypath, keepSession?) => {
   const result = await TrezorConnect.nemSignTransaction({
     path: hdKeypath,
     transaction,
+    keepSession,
   });
   if (result.success) {
     return result.payload;
