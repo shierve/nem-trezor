@@ -8,7 +8,9 @@
   "license": "MIT",
   "scripts": {
     "copyvendor": "cp -r ./src/vendor ./dist/src/vendor",
-    "build": "rm -rf dist && tsc && npm run copyvendor"
+    "build": "rm -rf dist && tsc && npm run copyvendor",
+    "preversion": "npm run build",
+    "postversion": "git push && git push --tags"
   },
   "keywords": [
     "NEM",
